@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Exercise_04_04
 {
-    struct Account
+    public struct Account
     {
         string login;
         string pass;
@@ -15,7 +16,7 @@ namespace Exercise_04_04
             this.pass = pass;
             authAttempts = 3;
         }
-        public string Login
+        string Login
         {
             set
             {
@@ -26,7 +27,7 @@ namespace Exercise_04_04
                 return login;
             }
         }
-        public string Pass
+        string Pass
         {
             set
             {
@@ -152,5 +153,73 @@ namespace Exercise_04_04
                 authAttempts--;
             return result;
         }
+        public void AddNewUser()
+        {
+            string tempLogin;
+            string tempPass;
+            bool result;
+            do
+            {
+                tempLogin = UI_Auth.GetNewLogin();
+                result = CheckNewLogin(tempLogin);
+                UI_Auth.ShowNewLoginResult(result);
+            } while (!result);
+            login = tempLogin;
+            do
+            {
+                tempPass = UI_Auth.GetNewPass();
+                result = CheckNewPass(tempPass);
+                UI_Auth.ShowNewPassResult(result);
+            } while (!result);
+            pass = tempPass;
+            //...добавить логику записи нового пользователя в файл...
+        }
+        /// <summary>
+        /// Осуществляет проверку логина на соответствие требованиям
+        /// </summary>
+        /// <param name="tempLogin">логин для проверки</param>
+        /// <returns></returns>
+        public bool CheckNewLogin(string tempLogin)
+        {
+            Regex rg = new Regex("^[a-zA-Z][a-zA-Z0-9]{1,9}$");
+            return rg.IsMatch(tempLogin);
+            #region Без использования регулярных выражений
+            //bool result = false;
+            //int charIndex = 0;
+            //if (tempLogin.Length <= 10 && tempLogin.Length >= 2)
+            //{
+            //    if (!char.IsDigit(tempLogin[0]))
+            //    {
+            //        do
+            //        {
+            //            if (char.IsDigit(tempLogin[charIndex]) || 
+            //                (tempLogin[charIndex] >= 65 && tempLogin[charIndex] <= 90) || 
+            //                (tempLogin[charIndex] >= 97 && tempLogin[charIndex] <= 122))
+            //            {
+            //                result = true;
+            //                charIndex++;
+            //            }
+            //            else
+            //            {
+            //                result = false;
+            //            }
+            //        } while (result && charIndex < tempLogin.Length);
+            //    }
+            //}
+            //return result;
+            #endregion
+        }
+
+        /// <summary>
+        /// Осуществляет проверку пароля на соответствие требованиям
+        /// </summary>
+        /// <param name="tempPass">пароль для проверки</param>
+        /// <returns></returns>
+        public bool CheckNewPass(string tempPass)
+        {
+            Regex rg = new Regex("(?=.*[0-9])(?=.*[!?.,@#$%^&*':;`№/_+(){}\"|-])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!?.,@#$%^&*':;`№/_+(){}\"|-]{8,}");
+            return rg.IsMatch(tempPass);
+        }
+
     }
 }

@@ -29,5 +29,27 @@ namespace Exercise_04_04
             else
                 Console.WriteLine($"Введен неверный логин и/или пароль. Осталось попыток ввода: {authAttempts}.");
         }
+        public static string GetNewLogin()
+        {
+            Console.WriteLine($"Логин должен содержать 2-10 символов, только буквы латинского алфавита или цифры, при этом цифра не может быть первой."); 
+            Console.Write("Введите логин: ");
+            return Console.ReadLine();
+        }
+        public static string GetNewPass()
+        {
+            Console.Write("Введите новый пароль: ");
+            return Console.ReadLine();
+        }
+
+        public static void ShowNewLoginResult(bool result)
+        {
+            if (result) Console.WriteLine("Логин доступен.");
+            else Console.WriteLine("Логин не удовлетворяет условиям, попробуйте еще раз.");
+        }
+        public static void ShowNewPassResult(bool result)
+        {
+            if (result) Console.WriteLine("Пароль установлен.");
+            else Console.WriteLine("Пароль не удовлетворяет условиям, попробуйте еще раз.");
+        }
     }
 }
