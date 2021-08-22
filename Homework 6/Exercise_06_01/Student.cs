@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Exercise_06_01
 {
@@ -13,6 +14,7 @@ namespace Exercise_06_01
         int course;
         int group;
         string city;
+        Random rd = new Random();
 
         public string Surname { get => surname; set => surname = value; }
         public string Name { get => name; set => name = value; }
@@ -25,15 +27,15 @@ namespace Exercise_06_01
         public string City { get => city; set => city = value; }
         public Student()
         {
-            surname = default;
-            name = default;
-            university = default;
-            faculty = default;
-            department = default;
-            age = default;
-            course = default;
-            group = default;
-            city = default;
+            surname = $"фамилия_{Guid.NewGuid().ToString().Substring(0, 4)}";
+            name = $"имя_{Guid.NewGuid().ToString().Substring(0, 4)}";
+            university = $"университет{rd.Next(1, 4)}";
+            faculty = $"факультет{rd.Next(1, 5)}";
+            department = $"направление{rd.Next(1, 10)}";
+            age = rd.Next(17, 30);
+            course = rd.Next(1, 7);
+            group = rd.Next(100, 999);
+            city = $"город{rd.Next(1, 15)}";
         }
         public Student(string surname, string name, string university, string faculty, string department, int age, int course, int group, string city)
         {
@@ -92,5 +94,9 @@ namespace Exercise_06_01
             }
             return count;
         }
+        public override string ToString()
+        {
+            return $"{surname};{name};{university};{faculty};{department};{age};{course};{group};{city};";
+        } 
     }
 }
