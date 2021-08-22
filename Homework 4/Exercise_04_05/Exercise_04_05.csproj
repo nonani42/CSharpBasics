@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <Reference Include="FirstLibrary">
-      <HintPath>..\..\ClassLibraryProjects\FirstLibrary\bin\Debug\net5.0\FirstLibrary.dll</HintPath>
+      <HintPath>..\..\ClassLibraryProjects\FirstLibrary\obj\Debug\net5.0\FirstLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 
