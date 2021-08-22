@@ -10,7 +10,7 @@ namespace Exercise_06_01
             StreamWriter stream = new StreamWriter(path);
             for (int i = 0; i < size; i++)
             {
-                stream.WriteLine($"{new Student()}");
+                stream.WriteLine($"{Student.GetStudent()}");
             }
             stream.Close();
         }
