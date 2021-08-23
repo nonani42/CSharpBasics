@@ -14,7 +14,6 @@ namespace Exercise_06_01
         int course;
         int group;
         string city;
-        Random rd = new Random();
 
         public string Surname { get => surname; set => surname = value; }
         public string Name { get => name; set => name = value; }
@@ -27,15 +26,15 @@ namespace Exercise_06_01
         public string City { get => city; set => city = value; }
         public Student()
         {
-            surname = $"фамилия_{Guid.NewGuid().ToString().Substring(0, 4)}";
-            name = $"имя_{Guid.NewGuid().ToString().Substring(0, 4)}";
-            university = $"университет{rd.Next(1, 4)}";
-            faculty = $"факультет{rd.Next(1, 5)}";
-            department = $"направление{rd.Next(1, 10)}";
-            age = rd.Next(17, 30);
-            course = rd.Next(1, 7);
-            group = rd.Next(100, 999);
-            city = $"город{rd.Next(1, 15)}";
+            surname = default;
+            name = default;
+            university = default;
+            faculty = default;
+            department = default;
+            age = default;
+            course = default;
+            group = default;
+            city = default;
         }
         public Student(string surname, string name, string university, string faculty, string department, int age, int course, int group, string city)
         {
@@ -48,6 +47,22 @@ namespace Exercise_06_01
             this.course = course;
             this.group = group;
             this.city = city;
+        }
+        public static Student GetStudent()
+        {
+            Random rd = new Random();
+            return new Student
+            {
+                surname = $"фамилия_{Guid.NewGuid().ToString().Substring(0, 4)}",
+                name = $"имя_{Guid.NewGuid().ToString().Substring(0, 4)}",
+                university = $"университет{rd.Next(1, 4)}",
+                faculty = $"факультет{rd.Next(1, 5)}",
+                department = $"направление{rd.Next(1, 10)}",
+                age = rd.Next(17, 30),
+                course = rd.Next(1, 7),
+                group = rd.Next(100, 999),
+                city = $"город{rd.Next(1, 15)}"
+            };
         }
         /// <summary>
         /// Подсчитывает количество студентов заданного курса
